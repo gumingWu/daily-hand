@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  extends: '@nuxt-themes/alpine',
+  extends: '@nuxt-themes/docus',
   content: {
     highlight: {
       theme: {
