@@ -21,6 +21,12 @@ export default defineAppConfig({
           icon: 'simple-icons:nuxtdotjs'
         }
       ]
+    },
+    github: {
+      edit: true,
+      owner: 'gumingWu',
+      repo: 'daily-hand',
+      branch: 'main',
     }
   },
 })
