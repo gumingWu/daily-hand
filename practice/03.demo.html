@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  hi
+
+  <script>
+    async function asyncPool(poolLimit, array, iteratorFn) {
+      const ret = []
+      const excuting = []
+      for(const item of array) {
+        const p = Promise.resolve().then(() => iteratorFn(item))
+        ret.push(p)
+        if(poolLimit <= array.length) {
+          const e = p.then(() => excuting.splice(excuting.indexOf(e), 1))
+          excuting.push(e)
+          if(excuting.length >= poolLimit) {
+            await Promise.race(excuting)
+          }
+        }
+      }
+      return await Promise.all(ret)
+    }
+
+    const curl = (i) => {
+      return fetch('https://robohash.org/' + i)
+    }
+    let urls = Array(10).fill(0).map((v,i) => i+10); // 图片有缓存，每次看效果得更新i
+
+    (async () => {
+      await asyncPool(3, urls, curl)
+    })()
+  </script>
+</body>
+</html>
