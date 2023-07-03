@@ -37,7 +37,16 @@ const proxy = new Proxy(obj, {
   }
 })
 
+// 正常情况
+// effect(() => {
+//   console.log(proxy.a)
+// })
+// proxy.a = 2
+
+
+// 分支切换
 effect(() => {
-  console.log(proxy.a)
+  console.log(proxy.a ? proxy.b : 'nothing')
 })
-proxy.a = 2
+proxy.a = null
+proxy.b = 123
